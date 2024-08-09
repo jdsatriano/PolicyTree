@@ -4,39 +4,34 @@ from services.openai_client import get_openai_client
 def generate_and_rank_tree(text):
     print("extracting and ranking tree")
     prompt = f"""
-    I have a medical policy document. Extract the medical guidelines and build a JSON decision tree that is clear and concise. Show clear paths for what is medically necessary and what is not. Follow these guidelines:
+    Create a JSON decision tree to determine the medical necessity of the procedure 
+    described in the provided text. The JSON should include: (1) "procedure_name" with 
+    the name of the procedure; (2) "decision_tree" with questions, options, and decisions 
+    covering initial approval and non-approval criteria; and (3) "quality" with a "ranking" 
+    field as "High", "Moderate", or "Low", and an "explanation" field describing the ranking 
+    based on completeness and integration. The tree should handle initial approval and non-approval. 
+    Return only the JSON object, no extra text or code block markers.
 
-    1. Identify sections that outline medical necessity criteria and non-medical necessity criteria.
-    2. Structure the decision tree:
-    - Use section headings as top-level keys.
-    - Include sub-criteria under each top-level key based on the document's structure.
-    3. Logical selection criteria:
-    - Specify whether all conditions ("all") must be met or if any one condition ("any") must be met.
-    - Differentiate between "Medically Necessary" and "Not Medically Necessary" criteria.
-
-    Please return only the JSON object, without any explanations or additional text. Do not wrap the JSON object in code block markers.
+    Format:
+    "procedure_name": "Procedure name",
+    "decision_tree":
+        "question": "Initial question",
+        "options":
+            "yes":
+                "question": "Next question",
+                "options":
+                    "yes":
+                        "decision": "Approval"
+                    "no":
+                        "decision": "Non-approval"
+            "no":
+                "decision": "Non-approval"
+    "quality":
+        "ranking": "High",
+        "explanation": "Reason for ranking"
 
     Below is the medical policy text:
     {text}
-
-    Here is an example of what the structure should be:
-
-    Medical_Procedure:
-    Medically_Necessary:
-        Procedure_Type:
-        Criteria:
-            Indications:
-                any: ["Condition A", "Condition B"]
-            Treatment_Criteria:
-                all: ["Treatment A", "Expected Outcome"]
-            Clinical_Criteria:
-                any: [
-                "Clinical Condition A",
-                "Clinical Condition B",
-                "Clinical Condition C"
-                ]
-    Not_Medically_Necessary:
-        - "Criteria for Procedure_Type not met"
     """
 
     client = get_openai_client()
