@@ -15,7 +15,7 @@ def get_openai_client():
 
     project_id = os.getenv("OPENAI_PROJECT_ID")
     if not project_id:
-        raise ValueError("OpenAI Project ID is missing")x
+        raise ValueError("OpenAI Project ID is missing")
     
     client = OpenAI(
         api_key=api_key,
