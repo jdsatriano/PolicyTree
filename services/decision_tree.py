@@ -11,8 +11,9 @@ async def generate_and_rank_tree(session, text):
     described in the provided text. The JSON should include: (1) "procedure_name" with 
     the name of the procedure; (2) "decision_tree" with questions, options, and decisions 
     covering initial approval and non-approval criteria; and (3) "quality" with a "ranking" 
-    field as "High", "Moderate", or "Low", and an "explanation" field describing the ranking 
-    based on completeness and integration. The tree should handle initial approval and non-approval. 
+    field as "Excellent", "Good", "Fair", "Poor", or "Very Poor", and an "explanation" field 
+    describing the ranking based on completeness, accuracy, clarity, and logical structure. 
+    The tree should handle initial approval and non-approval. 
     Return only the JSON object, no extra text or code block markers.
 
     Format:

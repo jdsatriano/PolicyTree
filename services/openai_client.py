@@ -16,7 +16,5 @@ def get_openai_client():
         organization=os.getenv('OPENAI_ORG_ID'),
         project='proj_LruZHkupTmn5HZLXWU844ULV'
     )
-    
-    # client.base_url = base_url
 
     return client
