@@ -2,41 +2,18 @@ import json
 import os
 import aiohttp
 import asyncio
+from pathlib import Path
 from services.text_extraction import extract_text_from_policy
 from services.openai_client import get_openai_client
 
+def load_prompt():
+    prompt_file_path = Path("prompts/decision_tree_prompt.txt")
+    with open(prompt_file_path, "r") as file:
+        return file.read()
+
 async def generate_and_rank_tree(session, text):
-    prompt = f"""
-    Create a JSON decision tree to determine the medical necessity of the procedure 
-    described in the provided text. The JSON should include: (1) "procedure_name" with 
-    the name of the procedure; (2) "decision_tree" with questions, options, and decisions 
-    covering initial approval and non-approval criteria; and (3) "quality" with a "ranking" 
-    field as "Excellent", "Good", "Fair", "Poor", or "Very Poor", and an "explanation" field 
-    describing the ranking based on completeness, accuracy, clarity, and logical structure. 
-    The tree should handle initial approval and non-approval. 
-    Return only the JSON object, no extra text or code block markers.
-
-    Format:
-    "procedure_name": "Procedure name",
-    "decision_tree":
-        "question": "Initial question",
-        "options":
-            "yes":
-                "question": "Next question",
-                "options":
-                    "yes":
-                        "decision": "Approval"
-                    "no":
-                        "decision": "Non-approval"
-            "no":
-                "decision": "Non-approval"
-    "quality":
-        "ranking": "High",
-        "explanation": "Reason for ranking"
-
-    Below is the medical policy text:
-    {text}
-    """
+    prompt_template = load_prompt()
+    prompt = prompt_template.format(text=text)
 
     client = get_openai_client()
     payload = {
@@ -57,7 +34,7 @@ async def process_pdf(filepath, session):
     return decision_tree
 
 async def process_all_pdfs_concurrently(directory_path):
-    print("Processing files")
+    print("Processing files and generating decision trees")
     async with aiohttp.ClientSession() as session:
         tasks = []
         for filename in os.listdir(directory_path):
