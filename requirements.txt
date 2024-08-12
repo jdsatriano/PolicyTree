@@ -3,3 +3,4 @@ uvicorn
 PyPDF2
 openai
 aiohttp
+python-dotenv
