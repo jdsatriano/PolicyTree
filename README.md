@@ -21,7 +21,9 @@ This project processes medical policy PDFs to generate machine-parseable decisio
     cd medical-policy-decision-tree
     ```
 2. **Install Dependencies:**
-    `pip3 install -r requirements.txt`
+    ```
+    pip3 install -r requirements.txt
+    ```
 3. **Set up environment variables:**
     Create a .env file in the root directory with the following content:
     ```
@@ -33,12 +35,18 @@ This project processes medical policy PDFs to generate machine-parseable decisio
 ## Running the Project
 
 1. **Start the server:**
-    `python3 -m uvicorn main:app --reload`
+    ```
+    python3 -m uvicorn main:app --reload
+    ```
 2. **Access the API:**
     Once the server is running, you can access the API endpoints at:
-    `http://127.0.0.1:8000`
+    ```
+    http://127.0.0.1:8000
+    ```
     Example endpoint to generate decision trees:
-    `GET /generate-decision-trees/`
+    ```
+    GET /generate-decision-trees/
+    ```
 
 ## Project Structure
 
