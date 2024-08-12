@@ -17,7 +17,7 @@ This project processes medical policy PDFs to generate machine-parseable decisio
 
 1. **Clone the repository:**
     ```
-    git clone https://github.com/yourusername/medical-policy-decision-tree.git
+    git clone https://github.com/jdsatriano/medical-policy-decision-tree.git
     cd medical-policy-decision-tree
     ```
 2. **Install Dependencies:**
