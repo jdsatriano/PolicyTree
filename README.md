@@ -29,7 +29,7 @@ This project processes medical policy PDFs to generate machine-parseable decisio
     ```
     OPENAI_API_KEY=your_openai_api_key
     OPENAI_ORG_ID=your_openai_org_id
-    PROJECT_ID=your_project_id
+    OPENAI_PROJECT_ID=your_project_id
     ```
 
 ## Running the Project
@@ -39,13 +39,9 @@ This project processes medical policy PDFs to generate machine-parseable decisio
     python3 -m uvicorn main:app --reload
     ```
 2. **Access the API:**
-    Once the server is running, you can access the API endpoints at:
+    Once the server is running, you can access the API endpoint at:
     ```
-    http://127.0.0.1:8000
-    ```
-    Example endpoint to generate decision trees:
-    ```
-    GET /generate-decision-trees/
+    http://127.0.0.1:8000/generate-decision-trees/
     ```
 
 ## Project Structure
