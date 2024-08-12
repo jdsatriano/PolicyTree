@@ -15,9 +15,7 @@ def get_openai_client():
 
     project_id = os.getenv("OPENAI_PROJECT_ID")
     if not project_id:
-        raise ValueError("OpenAI Project ID is missing")
-    
-    base_url = "https://api.openai.com/v1/chat/completions"
+        raise ValueError("OpenAI Project ID is missing")x
     
     client = OpenAI(
         api_key=api_key,

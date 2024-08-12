@@ -7,9 +7,9 @@ cache = {}
 
 @router.get("/generate-decision-trees/")
 async def generate_decision_trees():
-    if "policies" in cache and cache["policies"]:
-        return JSONResponse(content={"policies": cache["policies"]})
+    if "decision_trees" in cache and cache["decision_trees"]:
+        return JSONResponse(content={"decision_trees": cache["decision_trees"]})
     else:
         directory_path = "./policies"
-        cache["policies"] = await process_all_pdfs_concurrently(directory_path)
-        return JSONResponse(content={"policies": cache["policies"]})
+        cache["decision_trees"] = await process_all_pdfs_concurrently(directory_path)
+        return JSONResponse(content={"decision_trees": cache["decision_trees"]})

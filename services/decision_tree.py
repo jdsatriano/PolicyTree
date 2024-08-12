@@ -6,6 +6,8 @@ from pathlib import Path
 from services.text_extraction import extract_text_from_policy
 from services.openai_client import get_openai_client
 
+OPENAI_CHAT_URL = 'https://api.openai.com/v1/chat/completions'
+
 def load_prompt():
     prompt_file_path = Path("prompts/decision_tree_prompt.txt")
     with open(prompt_file_path, "r") as file:
@@ -24,7 +26,7 @@ async def generate_and_rank_tree(session, text):
         ]
     }
 
-    async with session.post("https://api.openai.com/v1/chat/completions", json=payload, headers={"Authorization": f"Bearer {client.api_key}"}) as response:
+    async with session.post(OPENAI_CHAT_URL, json=payload, headers={"Authorization": f"Bearer {client.api_key}"}) as response:
         response = await response.json()
         return json.loads(response["choices"][0]["message"]["content"])
 
